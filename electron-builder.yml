@@ -1,0 +1,47 @@
+appId: com.mosh.app
+productName: Mosh
+directories:
+  buildResources: build
+  output: dist
+files:
+  - 'out/**/*'
+  - 'resources/**/*'
+  - 'package.json'
+  - '!**/.vscode/*'
+  - '!src/*'
+  - '!electron.vite.config.{js,ts,mjs,cjs}'
+  - '!{.eslintcache,eslint.config.mjs,.prettierignore,.prettierrc.yaml,dev-app-update.yml,CHANGELOG.md,README.md}'
+  - '!{.env,.env.*,.npmrc,pnpm-lock.yaml}'
+  - '!{plan.md,prd.md,scripts/**}'
+asarUnpack:
+  - resources/**
+mac:
+  target:
+    - target: dmg
+      arch:
+        - universal
+  icon: build/icon.icns
+  category: public.app-category.productivity
+  minimumSystemVersion: '13.0'
+  hardenedRuntime: false
+  gatekeeperAssess: false
+  identity: null
+  notarize: false
+  entitlementsInherit: build/entitlements.mac.plist
+  extendInfo:
+    NSCameraUsageDescription: Mosh requests access to the device's camera so embedded services can use it.
+    NSMicrophoneUsageDescription: Mosh requests access to the device's microphone so embedded services can use it.
+    NSDocumentsFolderUsageDescription: Mosh requests access to your Documents folder so embedded services can read and write files.
+    NSDownloadsFolderUsageDescription: Mosh requests access to your Downloads folder so embedded services can save files there.
+dmg:
+  title: Mosh
+  artifactName: ${productName}-${version}-${arch}.${ext}
+  contents:
+    - x: 130
+      y: 220
+      type: file
+    - x: 410
+      y: 220
+      type: link
+      path: /Applications
+npmRebuild: false
